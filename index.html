@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="all.css">
+    <script src="https://kit.fontawesome.com/afffc5a1db.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="main">
+        <div class="main-left">
+            <img src="./img/main_img.png">
+            <img src="./img/logo.png">
+        </div>
+        <div class="form">
+            <h1><i class="fa-solid fa-circle-plus" style="color: #00807e;"></i>&nbsp; 新增旅遊套票</h1>
+            <div class="form-q">
+                <label for="ticketName">套票名稱</label>
+                <input type="text" id="ticketName" placeholder="請填寫套票名稱">
+            </div>
+            <div class="form-q">
+                <label for="ticketURL">圖片網址</label>
+                <input type="text" id="ticketURL" placeholder="請填寫圖片網址">
+            </div>
+            <div class="form-q">
+                <label for="ticketArea">景點地區</label>
+                <select name="ticketArea" id="ticketArea">
+                    <option value="default" disabled selected hidden>請選擇景點地區</option>
+                    <option value="taipei">台北</option>
+                    <option value="taichung">台中</option>
+                    <option value="kaohsiung">高雄</option>
+                </select>
+            </div>
+            <div class="form-q">
+                <label for="ticketPrice">套票金額</label>
+                <input type="text" id="ticketPrice" placeholder="請填寫套票金額">
+            </div>
+            <div class="form-q">
+                <label for="ticketPrice">套票組數</label>
+                <input type="text" id="ticketPrice" placeholder="請填寫套票組數">
+            </div>
+            <div class="form-q">
+                <label for="ticketLevel">套票星級</label>
+                <input type="text" id="ticketLevel" placeholder="請填寫套票星級">
+            </div>
+            <div class="form-q">
+                <label for="ticketDetail">套票描述</label>
+                <textarea name="ticketDetail" id="ticketDetail" cols="30" rows="5" placeholder="請填寫套票描述（限 100 字）"></textarea>
+            </div>
+            <button id="submitForm">新增套票</button>
+        </div>
+    </div>
+    <script src="all.js"></script>
+</body>
+</html>
