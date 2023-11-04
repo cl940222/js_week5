@@ -1,0 +1,1 @@
+let a = <i class="fa-solid fa-circle-exclamation"></i>;
