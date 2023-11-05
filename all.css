@@ -50,17 +50,20 @@ table {
 
 /* -- RESET 到此為止 -- */
 
-*::after, *::before{
+*, *::after, *::before{
     box-sizing: border-box;
+    transition: all .2s;
 }
 
 html{
     --mainColor: #00807e;
+    --subColor: #64c3bf;
 }
 
 body{
     font-size: 16px;
     line-height: 2;
+    font-family: 'Microsoft Jhenghei';
 }
 
 h1{
@@ -71,7 +74,7 @@ h1{
 
 .main{
     max-width: 920px;
-    margin: 50px auto;
+    margin: 50px auto 95px auto;
     border-radius: 10px;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -155,3 +158,148 @@ h1{
         align-items: center;
     }
 }
+
+.ticketList{
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 55px 0;
+}
+
+.chooseArea {
+    max-width: 920px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: grey;
+}
+
+.chooseArea>select {
+    font-size: 16px;
+    padding: 10px 12px;
+    border: 1px solid rgb(170, 168, 168);
+    border-radius: 5px;
+    width: 255px;
+    color: grey;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+
+.showTickets{
+    width: 100%;
+    margin: 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.showTickets>.ticketCard{
+    width: 31.33%;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.3);
+    padding-bottom: 16px;
+    margin-top: 60px;
+    margin-right: 20px;
+}
+
+@media screen and (max-width: 770px) {
+    .chooseArea{
+        justify-content: center;
+    }
+
+    .chooseArea select{
+        width: 90%;
+    }
+
+    .showTickets>.ticketCard{
+        width: 46%;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .showTickets{
+        justify-content: center;
+    }
+    .showTickets>.ticketCard{
+        width: 90%;
+    }
+}
+
+.ticketCard>.ticketImg, .ticketImg>a, .ticketImg img{
+    width: 100%;
+    height: 175px;
+   
+}
+
+.ticketImg>a{
+    overflow: hidden;
+    display: block;
+}
+
+.ticketImg img:hover{
+    transform: scale(1.2);
+}
+
+.ticketCard>.ticketImg{
+    position: relative;
+}
+
+.ticketImg .ticketArea{
+    position: absolute;
+    top: -15px;
+    font-size: 22px;
+    padding: 3px 25px;
+    color: white;
+    background-color: var(--subColor);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.ticketImg .ticketRank{
+    position: absolute;
+    bottom: -15px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 2px 10px;
+    color: white;
+    background-color: var(--mainColor);
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+}
+
+.ticketCard h2{
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--mainColor);
+    margin: 10px 16px;
+    border-bottom: 2px solid var(--mainColor);
+}
+
+.ticketCard p{
+    color: grey;
+    line-height: 1.5;
+    margin: 0 16px 30px 16px;
+}
+
+.ticketCard .ticketSale{
+    margin: 10px 16px;
+    color: var(--mainColor);
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+}
+
+.ticketCost{
+    display: flex;
+    justify-content: flex-end;
+    align-items: top;
+}
+
+.ticketCost .price{
+    font-size: 32px;
+    line-height: 1.2;
+    margin-left: 5px;
+}
+

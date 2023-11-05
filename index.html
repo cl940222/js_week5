@@ -6,6 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="all.css">
     <script src="https://kit.fontawesome.com/afffc5a1db.js" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/numeral.js/2.0.6/numeral.min.js"></script>
 </head>
 <body>
     <div class="main">
@@ -37,8 +38,8 @@
                 <input type="number" id="ticketPrice" placeholder="請填寫套票金額">
             </div>
             <div class="form-q">
-                <label for="ticketPrice">套票組數</label>
-                <input type="number" id="ticketPrice" placeholder="請填寫套票組數">
+                <label for="ticketGroup">套票組數</label>
+                <input type="number" id="ticketGroup" placeholder="請填寫套票組數">
             </div>
             <div class="form-q">
                 <label for="ticketLevel">套票星級</label>
@@ -50,6 +51,20 @@
             </div>
             <button id="submitForm">新增套票</button>
         </div>
+    </div>
+    <div class="ticketList">
+        <div class="chooseArea" id="chooseArea">
+            <select name="areaList" id="areaList">
+                <option value="allArea" selected>全部地區</option>
+                <option value="taipei">台北</option>
+                <option value="taichung">台中</option>
+                <option value="kaohsiung">高雄</option>
+            </select>
+            <span id="chooseNum"></span>
+        </div>
+        <ul class="showTickets" id="showTickets">
+            
+        </ul>
     </div>
     <script src="all.js"></script>
 </body>
