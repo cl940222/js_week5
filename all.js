@@ -1,64 +1,50 @@
 
-let data = [
-    {
-      "id": 0,
-      "name": "肥宅心碎賞櫻3日",
-      "imgUrl": "https://images.unsplash.com/photo-1522383225653-ed111181a951?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1655&q=80",
-      "area": "高雄",
-      "description": "賞櫻花最佳去處。肥宅不得不去的超讚景點！",
-      "group": 87,
-      "price": 1400,
-      "rate": 10
-    },
-    {
-      "id": 1,
-      "name": "貓空纜車雙程票",
-      "imgUrl": "https://images.unsplash.com/photo-1501393152198-34b240415948?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-      "area": "台北",
-      "description": "乘坐以透明強化玻璃為地板的「貓纜之眼」水晶車廂，享受騰雲駕霧遨遊天際之感",
-      "group": 99,
-      "price": 240,
-      "rate": 2
-    },
-    {
-      "id": 2,
-      "name": "台中谷關溫泉會1日",
-      "imgUrl": "https://images.unsplash.com/photo-1535530992830-e25d07cfa780?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80",
-      "area": "台中",
-      "description": "全館客房均提供谷關無色無味之優質碳酸原湯，並取用八仙山之山冷泉供蒞臨貴賓沐浴及飲水使用。",
-      "group": 20,
-      "price": 1765,
-      "rate": 7
-    }
-  ];
+let data = [];
 
-window.onload = function(){
-    let area = document.getElementById('areaList').value;
-    searchPlace();
-    let newArea = document.getElementById('areaList');
-    newArea.onchange = function(){
+let obj = {
+    "id": 1,
+    "name": "",
+    "imgUrl": "",
+    "area": "",
+    "description": "",
+    "group": 0,
+    "price": 0,
+    "rate": 0
+};
+
+let area = document.getElementById('areaList').value;
+let newArea = document.getElementById('areaList');
+
+window.onload = function () {
+    axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
+        .then(function (response) {
+            data = response.data.data;
+            showTicket(data);
+            searchPlace();
+        });
+    newArea.onchange = function () {
         searchPlace();
     }
-    function searchPlace(){
+    function searchPlace() {
         area = document.getElementById('areaList').value;
         console.log(area);
-        if(area === "allArea"){
+        if (area === "allArea") {
             showTicket(data);
-        } else if (area === "taipei"){
-            let searchArea = data.filter((data)=>data.area === "台北");
+        } else if (area === "taipei") {
+            let searchArea = data.filter((data) => data.area === "台北");
             showTicket(searchArea);
-        } else if (area === "taichung"){
-            let searchArea = data.filter((data)=>data.area === "台中");
+        } else if (area === "taichung") {
+            let searchArea = data.filter((data) => data.area === "台中");
             showTicket(searchArea);
-        } else if (area === "kaohsiung"){
-            let searchArea = data.filter((data)=>data.area === "高雄");
+        } else if (area === "kaohsiung") {
+            let searchArea = data.filter((data) => data.area === "高雄");
             showTicket(searchArea);
         }
         return;
     }
-    function showTicket(arr){
+    function showTicket(arr) {
         document.getElementById('showTickets').innerHTML = "";
-        arr.forEach(function(item){
+        arr.forEach(function (item) {
             let itemHTML = `<li class="ticketCard">
                                 <div class="ticketImg">
                                     <a href="#">
@@ -87,30 +73,44 @@ window.onload = function(){
             document.getElementById("chooseNum").innerHTML = `本次搜尋共 ${arr.length} 筆資料`;
         })
     }
+    function isEmpty() {
+        if (ticketName.value.length === 0) {
+            return true;
+        } else if (ticketURL.value.length === 0) {
+            return true;
+        } else if (ticketArea.value === "allArea") {
+            return true;
+        } else if (ticketDetail.value.length === 0) {
+            return true;
+        } else if (ticketGroup.value.length === 0) {
+            return true;
+        } else if (ticketPrice.value.length === 0) {
+            return true;
+        } else if (ticketLevel.value.length === 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     let addBtn = document.getElementById('submitForm');
-    let obj = {
-        "id": 1,
-        "name": "",
-        "imgUrl": "",
-        "area": "",
-        "description": "",
-        "group": 0,
-        "price": 0,
-        "rate": 0
-    };
-    addBtn.onclick = function(){
-        let obj = {
-            "id": data[data.length-1].id + 1,
-            "name": document.getElementById("ticketName").value,
-            "imgUrl": document.getElementById("ticketURL").value,
-            "area": document.getElementById("ticketArea").value === "taipei"? "台北" : document.getElementById("ticketArea").value === "taichung"? "台中" : "高雄",
-            "description": document.getElementById("ticketDetail").value,
-            "group": document.getElementById("ticketGroup").value,
-            "price": document.getElementById("ticketPrice").value,
-            "rate": document.getElementById("ticketLevel").value
-        };
-        data.push(obj);
-        searchPlace();
+    addBtn.onclick = function () {
+        let formEmpty = isEmpty();
+        if (formEmpty) {
+            alert('請填寫完整');
+        } else {
+            let obj = {
+                "id": data[data.length - 1].id + 1,
+                "name": document.getElementById("ticketName").value,
+                "imgUrl": document.getElementById("ticketURL").value,
+                "area": document.getElementById("ticketArea").value === "taipei" ? "台北" : document.getElementById("ticketArea").value === "taichung" ? "台中" : "高雄",
+                "description": document.getElementById("ticketDetail").value,
+                "group": document.getElementById("ticketGroup").value,
+                "price": document.getElementById("ticketPrice").value,
+                "rate": document.getElementById("ticketLevel").value
+            };
+            data.push(obj);
+            searchPlace();
+        }
     }
 }   
