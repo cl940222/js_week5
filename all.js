@@ -15,15 +15,53 @@ let obj = {
 let area = document.getElementById('areaList').value;
 let newArea = document.getElementById('areaList');
 
+
 window.onload = function () {
     axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
         .then(function (response) {
             data = response.data.data;
             showTicket(data);
+            createChart(data);
             searchPlace();
         });
     newArea.onchange = function () {
         searchPlace();
+    }
+    function createChart(arr){
+        let newObj = {
+            "台北": 0,
+            "台中": 0,
+            "高雄": 0
+        };
+        arr.forEach(function(item){
+            newObj[`${item.area}`]++;
+        })
+        let areaKey = Object.keys(newObj);
+        let areaNum = Object.values(newObj);
+        let newArr = [];
+        for(let i = 0; i<areaKey.length; i++){
+            newArr.push([areaKey[i], areaNum[i]]);
+        }
+        const chart = c3.generate({
+            size: {
+                height: 200,
+                width: 200
+            },
+            data: {
+                columns: newArr,
+                type: 'donut',
+            },
+            color: {
+                pattern: ['#e68618', '#5151d3', '#26c0c7']
+            },
+            donut: {
+                title: "套票地區比重",
+                label: {
+                    show: false
+                },
+                width: 15
+            }
+        });
     }
     function searchPlace() {
         area = document.getElementById('areaList').value;
@@ -110,6 +148,7 @@ window.onload = function () {
                 "rate": document.getElementById("ticketLevel").value
             };
             data.push(obj);
+            createChart(data);
             searchPlace();
         }
     }
